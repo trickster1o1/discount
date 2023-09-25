@@ -70,251 +70,38 @@
 </head>
 
 <body id="bod">
-    <div id="siteLoader" class="site-loader">
-        <div class="preloader-content">
-            <img src="{{ asset('Frontend/assets/images/loader1.gif') }}" alt="">
-        </div>
-    </div>
+
     {!! Toastr::message() !!}
-    <section class="header-section" id="head-nav">
-        <nav class="header-top">
-            <div class="home-search">
-                <span>
-                    <i class="fas fa-search"></i>
-                    <input type="text" name="search" placeholder="Search..." autocomplete="off">
-                </span>
-            </div>
-            <div>
-                <a href="/"><img src="/{{ $siteSetting->primary_logo }}" alt="LOGO"></a>
 
-            </div>
-            <div>
-                <div class="social-media">
-                    @if ($siteSetting->fb_link)
-                        <span><a href="{{ $siteSetting->fb_link }}" target="_blank" rel="noopener noreferrer"><i
-                                    class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        </span>
-                    @endif
-                    @if ($siteSetting->twitter_link)
-                        <span><a href="{{ $siteSetting->twitter_link }}" target="_blank" rel="noopener noreferrer"><i
-                                    class="fab fa-twitter" aria-hidden="true"></i></a></span>
-                    @endif
-                    @if ($siteSetting->ig_link)
-                        <span><a href="{{ $siteSetting->ig_link }}" target="_blank" rel="noopener noreferrer"><i
-                                    class="fab fa-instagram" aria-hidden="true"></i></a>
-                        </span>
-                    @endif
-                    @if ($siteSetting->youtube_link)
-                        <span><a href="{{ $siteSetting->youtube_link }}" target="_blank" rel="noopener noreferrer"><i
-                                    class="fab fa-youtube" aria-hidden="true"></i></a>
-                        </span>
-                    @endif
-                    @if ($siteSetting->linkedin_link)
-                        <span><a href="{{ $siteSetting->linkedin_link }}" target="_blank"
-                                rel="noopener noreferrer"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                        </span>
-                    @endif
-                    {{-- <span><i class="fab fa-twitter" aria-hidden="true"></i></span>
-                    <span><i class="fab fa-instagram" aria-hidden="true"></i></span>
-                    <span><i class="fab fa-youtube" aria-hidden="true"></i></span> --}}
-                </div>
-                <div class="log-info">
-                    <div class="profile-img""><img class="i-fit"
-                            src="{{Session::has('user') ? (!Session::get('user')['pic'] ? 'https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png' : (str_starts_with(Session::get('user')['pic'], 'http') ? Session::get('user')['pic'] : '/' . Session::get('user')['pic'])) : 'https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png'}}"
-                            alt="-"></div>
-                    @if (!Session::has('user'))
-                        <span style="margin-left:10px;margin-right:20px;"><a href="/login">Log In</a></span>
-                    @else
-                        <span style="margin-left:10px;margin-right:20px;"><a href="{{route('customer.profile')}}">{{Session::get('user')['unm']}}</a></span>
-                    @endif
-                    <span><a href="{{Session::has('user') ? '/cart' : '/cart'}}"  @if(Session::has('user') && Session::get('user')['cart'] && count(Session::get('user')['cart'])) style="font-weight: bold;color:green;" @endif class="cart-ping" >Cart {{ Session::has('user') && Session::get('user')['cart'] ? (count(Session::get('user')['cart']) ? '('.count(Session::get('user')['cart']).')' : null) : null }}</a></span>
-                </div>
-            </div>
-        </nav>
-        <nav class="header-bot">
-            @if (count($main_menu))
-                <ul>
-                    @foreach ($main_menu as $parent)
-                        @if ($parent->parent == 0)
-                            @php
-                                $plink = 'javascript:void(0)';
-                                if ($parent->link_type == 'external_url') {
-                                    $plink = $parent->external_url;
-                                } elseif ($parent->link_type == 'internal_link') {
-                                    $plink = '/' . $parent->getLink($parent->topic);
-                                }
-                            @endphp
-                            <li @if (count($parent->getSubMenus($parent->id))) class='with-child' @endif>
-                                <a href="{{ $plink }}">{{ $parent->title }}</a>
-                                @if (count($parent->getSubMenus($parent->id)))
-                                    <ul class="d-nav">
-                                        @foreach ($parent->getSubMenus($parent->id) as $child)
-                                            @php
-                                                $clink = 'javascript:void(0)';
-                                                if ($child->link_type == 'external_url') {
-                                                    $clink = $child->external_url;
-                                                } elseif ($child->link_type == 'internal_link') {
-                                                    $clink = '/' . $child->getLink($child->topic);
-                                                }
-                                            @endphp
-                                            <li>
-                                                <a href="{{ $clink }}">{{ $child->title }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </li>
-                        @endif
-                    @endforeach
-                </ul>
-            @endif
-            {{-- <ul>
-                <li>Home</li>
-                <li>Shop All</li>
-                <li>Our Story</li>
-                <li>Our Craft</li>
-                <li>Contact</li>
-            </ul> --}}
-        </nav>
-    </section>
-    <section class="mob-nav">
-        <div>
-            <div class="mobile-media">
-                <span><i class="fab fa-facebook-f" aria-hidden="true"></i></span>
-                <span><i class="fab fa-twitter" aria-hidden="true"></i></span>
-                <span><i class="fab fa-instagram" aria-hidden="true"></i></span>
-                <span><i class="fab fa-youtube" aria-hidden="true"></i></span>
-            </div>
-            <div class="mob-nav-right">
-                <span>Cart</span>
-                <span class="burger" id="b-bod">
-                    <span id="b-top"></span>
-                    <span id="b-mid"></span>
-                    <span id="b-bot"></span>
-                </span>
-            </div>
-        </div>
-        <div class='m-logo'>
-            <a href="/"><img src="/{{ $siteSetting->primary_logo }}" alt="LOGO"></a>
-        </div>
-    </section>
-    <div class="mob-nav-pop container-fluid" id="m-nav-p">
-        <div style="display: flex;align-items:center;">
-            <div class="profile-img"><img style="i-fit"
-                    src="https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png"
-                    alt="-"></div><span style="margin-left:10px;margin-right:20px;"> Log In</span>
-        </div>
-        <div class="home-search">
-            <span>
-                <i class="fas fa-search"></i>
-                <input type="text" name="search" placeholder="Search..." autocomplete="off">
-            </span>
-        </div>
-        @if (count($main_menu))
+    <div class="nav-cont custom-cont">
+        <div class="nav-top">
             <ul>
-                @foreach ($main_menu as $parent)
-                    @if ($parent->parent == 0)
-                        @php
-                            $plink = 'javascript:void(0)';
-                            if ($parent->link_type == 'external_url') {
-                                $plink = $parent->external_url;
-                            } elseif ($parent->link_type == 'internal_link') {
-                                $plink = '/' . $parent->getLink($parent->topic);
-                            }
-                        @endphp
-                        <li @if (count($parent->getSubMenus($parent->id))) class='with-child-mob' @endif>
-                            <a href="{{ $plink }}">{{ $parent->title }}</a>
-                            @if (count($parent->getSubMenus($parent->id)))
-                                <ul class="d-nav-mob">
-                                    @foreach ($parent->getSubMenus($parent->id) as $child)
-                                        @php
-                                            $clink = 'javascript:void(0)';
-                                            if ($child->link_type == 'external_url') {
-                                                $clink = $child->external_url;
-                                            } elseif ($child->link_type == 'internal_link') {
-                                                $clink = '/' . $child->getLink($child->topic);
-                                            }
-                                        @endphp
-                                        <li>
-                                            <a href="{{ $clink }}">{{ $child->title }}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </li>
-                    @endif
-                @endforeach
+                <li>Get The App</li>
+                <li>My Whishlist</li>
+                <li>Sell on Groupon</li>
+                <li>Sign Up</li>
             </ul>
-        @endif
-
+        </div>
+        <div class="nav-bot">
+            <ul>
+                <li class="nav-logo"><img src="{{ $siteSetting ? '/' . $siteSetting->primary_logo : 'empty' }}"
+                        alt="DISCOUNT"></li>
+                <li><span class="d-box">Categories</span></li>
+                <li><span>
+                        <span>
+                            <input type="text" placeholder="Search Discount">
+                        </span>
+                        <span>
+                            <input type="text" placeholder="Kathmandu">
+                        </span>
+                    </span></li>
+                <li><i class="fa fa-cart"><i class="fas fa-cart-plus"></i></i></li>
+                <li><i class="fas fa-bell"></i></li>
+                <li><span class="d-box">Sign Up</span></li>
+            </ul>
+        </div>
     </div>
     @yield('body')
-    <section class="footer-section container-fluid">
-        <span>
-            <a href="/"><img src="/{{ $siteSetting->primary_logo }}" alt="LOGO"></a>
-        </span>
-        @if (count($footer_menu))
-            <ul>
-                @foreach ($footer_menu as $parent)
-                    @if ($parent->parent == 0)
-                        @php
-                            $plink = 'javascript:void(0)';
-                            if ($parent->link_type == 'external_url') {
-                                $plink = $parent->external_url;
-                            } elseif ($parent->link_type == 'internal_link') {
-                                $plink = '/' . $parent->getLink($parent->topic);
-                            }
-                        @endphp
-                        <li>
-                            <a href="{{ $plink }}">{{ $parent->title }}</a>
-
-                        </li>
-                    @endif
-                @endforeach
-            </ul>
-        @endif
-        {{-- <ul>
-            <li>Home</li>
-            <li>Shop All</li>
-            <li>Our Story</li>
-            <li>Our Craft</li>
-            <li>Contact</li>
-        </ul> --}}
-        @if (count($f_prod))
-            <ul>
-                @foreach ($f_prod as $prod)
-                    <li><a href="/product/{{ $prod->slug }}">{{ $prod->title }}</a></li>
-                @endforeach
-                {{-- <li>Product 1</li>
-                <li>Product 2</li>
-                <li>Product 3</li>
-                <li>Product 4</li> --}}
-            </ul>
-        @endif
-        <ul>
-            @if ($siteSetting->fb_link)
-                <li><a href="{{ $siteSetting->fb_link }}" target="_blank" rel="noopener noreferrer">Facebook</a>
-                </li>
-            @endif
-            @if ($siteSetting->twitter_link)
-                <li><a href="{{ $siteSetting->twitter_link }}" target="_blank" rel="noopener noreferrer">Twitter</a>
-                </li>
-            @endif
-            @if ($siteSetting->ig_link)
-                <li><a href="{{ $siteSetting->ig_link }}" target="_blank" rel="noopener noreferrer">Instagram</a>
-                </li>
-            @endif
-            @if ($siteSetting->youtube_link)
-                <li><a href="{{ $siteSetting->youtube_link }}" target="_blank" rel="noopener noreferrer">Youtube</a>
-                </li>
-            @endif
-            @if ($siteSetting->linkedin_link)
-                <li><a href="{{ $siteSetting->linkedin_link }}" target="_blank" rel="noopener noreferrer">Linked
-                        In</a>
-                </li>
-            @endif
-        </ul>
-    </section>
 
     <!-- JavaScript -->
     <script src='{{ asset('Frontend/assets/js/jquery.js') }}'></script>
@@ -330,30 +117,6 @@
     <script src='{{ asset('Frontend/assets/js/jquery.slicknav.js') }}'></script>
     <script src='{{ asset('Frontend/assets/js/custom.min.js') }}'></script>
     <script src='{{ asset('Frontend/assets/custom.js') }}'></script>
-
-    <script>
-        let nav = 0;
-        $('#b-bod').click(() => {
-            if (nav == 0) {
-                $('#b-top').css("transform", "rotate(240deg) scale(1.2)");
-                $('#b-mid').css("transform", "rotate(-45deg) scale(1.2)");
-                $('#b-bot').css("background-color", "rgba(0,0,0,0)");
-                $('#m-nav-p').css("top", "0");
-                $('#m-nav-p').css("opacity", "1");
-                $('#bod').css("overflow-y", "hidden");
-                nav = 1;
-            } else {
-                $('#b-top').css("transform", "rotate(0deg) scale(1)");
-                $('#b-mid').css("transform", "rotate(0deg) scale(1)");
-                $('#b-bot').css("background-color", "rgba(0,0,0,1)");
-                $('#m-nav-p').css("top", "-100%");
-                $('#m-nav-p').css("opacity", "0");
-                $('#bod').css("overflow-y", "auto");
-                nav = 0;
-            }
-        });
-    </script>
-
     @yield('script')
 </body>
 

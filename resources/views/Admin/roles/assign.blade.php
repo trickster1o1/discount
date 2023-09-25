@@ -47,7 +47,7 @@
                             <div class="d-flex">
                                 @foreach ($menu->permissions as $permission)
                                 <div class="form-group mb-0">
-                                    <label class="mr-1" for="{{ $menu->id . '-' . $permission->id }}">
+                                    <label c lass="mr-1" for="{{ $menu->id . '-' . $permission->id }}">
                                         {{ $permission->name }}
                                     </label>
                                     <input class="form-select mr-2" type="checkbox"
