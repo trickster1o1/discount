@@ -65,3 +65,13 @@
     font-weight: bold;
 }
 /* ======================================== */
+
+/* ============== Trending ================ */
+.popular-cont {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1em;
+}.popular-cont .t-thumb {
+    height: 200px;
+}
+/* ======================================== */
