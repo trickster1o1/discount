@@ -103,6 +103,49 @@
     </div>
     @yield('body')
 
+    <div class="footer-cont custom-cont">
+        <div>
+            <ul>
+                <li><b>Customer Suppot</b></li>
+                <li><a href="#" class="custom-btn">Help Center</a></li>
+                <li>Refund Policies</li>
+                <li>Report Infringement</li>
+                <li>Merchant Class Statement Notice</li>
+            </ul>
+        </div>
+        <div>
+            
+            <ul>
+                <li><b>Sell on Discount</b></li>
+                <li>Join Marketplace</li>
+                <li>Run Campaign</li>
+                <li>How does Discount work for Merchants</li>
+                <li>Sponser for Campaign</li>
+                <li>Vendor Code of Conduct</li>
+            </ul>
+        </div>
+        <div>
+            
+            <ul>
+                <li><b>Company</b></li>
+                <li>About</li>
+                <li>Jobs</li>
+                <li>Investor Relations</li>
+                <li>Management Team</li>
+                <li>In Your Company</li>
+            </ul>
+        </div>
+        <div>
+            
+            <ul>
+                <li><b>Quick Links</b></li>
+                <li>Treat Yourself +</li>
+                <li>Things to do +</li>
+                <li>Coupons +</li>
+                <li>Gifts for Occasions +</li>
+            </ul>
+        </div>
+    </div>
     <!-- JavaScript -->
     <script src='{{ asset('Frontend/assets/js/jquery.js') }}'></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
