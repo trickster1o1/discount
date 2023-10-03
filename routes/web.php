@@ -42,6 +42,7 @@ use App\Http\Controllers\Admin\Sub_CategoryController;
 use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\Admin\SupportersController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\VolunteerController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
@@ -98,6 +99,7 @@ Route::group(['middleware' => 'auth'], function () {
         'admin/product' => ProductController::class,
         'admin/discount' => DiscountController::class,
         'admin/review' => ReviewController::class,
+        'admin/vendors' => VendorController::class,
     ]);
 
 // Edit profile route
@@ -139,6 +141,7 @@ Route::group(['middleware' => 'auth'], function () {
    //------- 
     Route::get('/sub_cat_data', [Sub_CategoryController::class, 'sub_cat_data']);
     Route::get('/blog_data', [BlogsController::class, 'blog_data']);
+    Route::get('/vendor_data', [VendorController::class, 'vendor_data']);
     Route::get('/product_data', [ProductController::class, 'product_data']);
     Route::get('/order_data', [AdminOrderController::class, 'order_data']);
     Route::get('/discount_data', [DiscountController::class, 'discount_data']);
