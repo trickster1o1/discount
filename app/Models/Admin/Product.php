@@ -11,7 +11,7 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'title','price','slug', 'status', 'created_by', 'updated_by', 'thumb_image', 'featured_image','imga','imgb','imgc','imgd', 'description', 'short_description', 'meta_key', 'meta_description', 'fb_title', 'fb_description', 'fb_image', 'twitter_title', 'twitter_description', 'twitter_image', 'category', 'tags', 'is_featured',
+        'title','price','slug','vendor', 'status', 'created_by', 'updated_by', 'thumb_image', 'featured_image','imga','imgb','imgc','imgd', 'description', 'short_description', 'meta_key', 'meta_description', 'fb_title', 'fb_description', 'fb_image', 'twitter_title', 'twitter_description', 'twitter_image', 'category', 'tags', 'is_featured',
     ];
 
     public $sortable  = ['title', 'category','price','status'];

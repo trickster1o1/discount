@@ -82,12 +82,29 @@
                                             id="category">
                                             <option value="">Select Category</option>
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}" {{$category->id == old('category') ? 'selected' : null}}>
+                                                <option value="{{ $category->id }}"
+                                                    {{ $category->id == old('category') ? 'selected' : null }}>
                                                     {{ $category->title }}
                                                 </option>
                                             @endforeach
                                         </select>
                                         @error('category')
+                                            <span class="invalid-feedback"> {{ $message }} </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="vendor">Vendor *</label>
+                                        <select class="form-control @error('vendor') is-invalid @enderror" name="vendor"
+                                            id="vendor">
+                                            <option value="">Select Category</option>
+                                            @foreach ($vendors as $vendor)
+                                                <option value="{{ $vendor->id }}"
+                                                    {{ $vendor->id == old('vendor') ? 'selected' : null }}>
+                                                    {{ $vendor->vendor_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('vendor')
                                             <span class="invalid-feedback"> {{ $message }} </span>
                                         @enderror
                                     </div>
@@ -114,19 +131,19 @@
                                         'enable_thumb_image' => true,
                                         'enable_banner_image' => false,
                                     ])
-                                    
+
                                     @include('inputs.mediainput', [
                                         ($data = ['imga', 'Image 1', 'Enter Image 1']),
                                     ])
-                                    
+
                                     @include('inputs.mediainput', [
                                         ($data = ['imgb', 'Image 2', 'Enter Image 2']),
                                     ])
-                                    
+
                                     @include('inputs.mediainput', [
                                         ($data = ['imgc', 'Image 3', 'Enter Image 3']),
                                     ])
-                                    
+
                                     @include('inputs.mediainput', [
                                         ($data = ['imgd', 'Image 4', 'Enter Image 4']),
                                     ])
@@ -149,21 +166,6 @@
                                             <span class="invalid-feedback"> {{ $message }} </span>
                                         @enderror
                                     </div> --}}
-                                    <div class="form-group col-md-6">
-                                        <label for="is_featured">Is Featured</label>
-                                        <select class="form-control @error('is_featured') is-invalid @enderror"
-                                            id="is_featured" name="is_featured">
-                                            <option value="Yes" {{ old('is_featured') == 'Yes' ? 'selected' : '' }}>
-                                                Yes
-                                            </option>
-                                            <option value="No" {{ old('is_featured') != 'Yes' ? 'selected' : '' }}>
-                                                No
-                                            </option>
-                                        </select>
-                                        @error('status')
-                                            <span class="invalid-feedback"> {{ $message }} </span>
-                                        @enderror
-                                    </div>
 
                                     <div class="form-group col-md-6">
                                         <label for="description">Description</label>
@@ -184,6 +186,21 @@
 
 
 
+                                    <div class="form-group col-md-6">
+                                        <label for="is_featured">Is Featured</label>
+                                        <select class="form-control @error('is_featured') is-invalid @enderror"
+                                            id="is_featured" name="is_featured">
+                                            <option value="Yes" {{ old('is_featured') == 'Yes' ? 'selected' : '' }}>
+                                                Yes
+                                            </option>
+                                            <option value="No" {{ old('is_featured') != 'Yes' ? 'selected' : '' }}>
+                                                No
+                                            </option>
+                                        </select>
+                                        @error('status')
+                                            <span class="invalid-feedback"> {{ $message }} </span>
+                                        @enderror
+                                    </div>
                                     <div class="form-group col-md-6">
                                         <label for="status">Status</label>
                                         <select class="form-control @error('status') is-invalid @enderror" id="status"

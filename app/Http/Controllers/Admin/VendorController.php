@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller\Admin;
+use App\Http\Requests\Admin\VendorRequest;
+use App\Models\Admin\Category;
 use App\Models\Vendor\Vender;
 use Illuminate\Http\Request;
+use Toastr;
 
 class VendorController extends Controller
 {
@@ -15,6 +18,7 @@ class VendorController extends Controller
      */
     private $menuCode = 'VENDOR';
     private $table      = 'venders';
+    private $category_type      = 'vendor';
 
 
     function vendor_data(Request $request)
@@ -112,6 +116,10 @@ class VendorController extends Controller
     public function create()
     {
         //
+        authorize($this->menuCode, 'CREATE');
+        $categories = Category::where('status', '!=', 'deleted')->where('category_type', $this->category_type)->get();
+        return view('Admin.vendor.create', compact('categories') + array('menucode' => $this->menuCode));
+
     }
 
     /**
@@ -120,9 +128,14 @@ class VendorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VendorRequest $request)
     {
         //
+        authorize($this->menuCode, 'CREATE');
+        $validated = $request->validated();
+        $data = Vender::create($validated);
+        Toastr::success('Vendor Created Successfully', 'Sucess');
+        return redirect()->route('vendors.index');
     }
 
     /**

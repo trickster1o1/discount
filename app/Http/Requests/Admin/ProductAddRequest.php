@@ -30,6 +30,7 @@ class ProductAddRequest extends FormRequest
           'slug' => ['required', new UniqueSlug],
           'status' => 'nullable',
           'category' => 'required',
+          'vendor' => 'required',
           'price' => 'required|numeric',
           'short_description' => 'nullable',
           'thumb_image' => 'required',

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\Admin\ProductAddRequest;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
+use App\Models\Vendor\Vender;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -130,7 +131,8 @@ class ProductController extends Controller
     {
         //
         $categories = Category::where('category_type', $this->category_type)->get();
-        return view('Admin.product.create', compact('categories') + ['menucode' => $this->menuCode]);
+        $vendors = Vender::where('status','active')->get();
+        return view('Admin.product.create', compact('categories','vendors') + ['menucode' => $this->menuCode]);
     }
 
     /**
